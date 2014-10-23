@@ -1,0 +1,17 @@
+<h1>{{ city }}</h1>
+<article class="current">
+  <h2 class="temperature">{{condition.temp}}&deg;</h2>
+  <p class="conditions">
+    <img src="http://l.yimg.com/a/i/us/we/52/{{ condition.code }}.gif"/>
+    {{ condition.text }}
+  </p>
+</article>
+<ol class="weekly-forecast">
+{{#each forecast}}
+  <li>
+    <h3>{{ day }}</h3>
+    <span class="high">{{ high }}&deg;</span> /
+    <span class="low">{{ low }}&deg;</span>
+  </li>
+{{/each}}
+</ol>

@@ -2,97 +2,55 @@
 <html>
   <head>
     <title>Cvent Tech Challenge</title>
+    <meta charset="utf-8" />
   </head>
   <body>
-    <style>
-      section.weather-widget {
-        position: absolute;
-        width: 400px;
-        height: 170px;
-        left: 50%;
-        top: 50%;
-        margin: -85px 0 0 -200px;
-        border: 1px solid #999;
-        border-radius: 16px;
-        padding:10px;
-        -webkit-box-shadow: 10px 10px 8px 0px #777;
-        box-shadow: 10px 10px 10px 0px #777;
 
-        font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
-        font-size: 12px;
-      }
-      .weather-widget h1, .weather-widget h2, .weather-widget h3{
-        margin: 0;
-        font-weight: normal;
-      }
-      .weather-widget h1{
-        font-size: 170%;
+    <script type="text/javascript">
+    (function(){
+      function loadFile(filename, filetype, onload){
+       if (filetype=="js"){ //if filename is a external JavaScript file
+        var fileref=document.createElement('script')
+        fileref.setAttribute("type","text/javascript")
+        fileref.setAttribute("src", filename)
+       }
+       else if (filetype=="css"){ //if filename is an external CSS file
+        var fileref=document.createElement("link")
+        fileref.setAttribute("rel", "stylesheet")
+        fileref.setAttribute("type", "text/css")
+        fileref.setAttribute("href", filename)
+       }
+       if (typeof fileref!="undefined"){
+         fileref.onload = onload
+         document.getElementsByTagName("head")[0].appendChild(fileref)
+       }
+
       }
 
-      .weather-widget article.current {
-        margin: 10px 0;
-        clear:both;
+      var render = function(data){
+        data.city = "McLean, VA";
+        $("section.weather-widget").append(Handlebars.templates.widget(data))
       }
-      .weather-widget article.current h2 {
-        font-size: 650%;
-        float:left;
+
+      var init = function(){
+        if($("section.weather-widget").length == 0){
+          $('body').append( '<section class="weather-widget"></section>' )
+        }
+        $.getJSON("http://query.yahooapis.com/v1/public/yql?q=select%20item%20from%20weather.forecast%20where%20location%3D%2222102%22&format=json")
+          .done(function( data ){
+            render(data.query.results.channel.item)
+          })
       }
-      .weather-widget article.current p.conditions img{
-        display: block;
-        margin-left:4px;
-      }
-      .weather-widget ol.weekly-forecast {
-        clear: both;
-        list-style: none;
-        margin: 0;
-        padding: 0;
-      }
-      .weather-widget ol.weekly-forecast li {
-        display: inline-block;
-        width: 17%;
-        padding: 0 0 0 2%;
-        text-align: center;
-      }
-      .weather-widget ol.weekly-forecast li ~ li {
-        border-left: 1px solid #ddd;
-      }
-    </style>
-    <section class="weather-widget">
-      <h1>Mclean, VA</h1>
-      <article class="current">
-        <h2 class="temperature">57&deg;</h2>
-        <p class="conditions">
-          <img src="http://l.yimg.com/a/i/us/we/52/26.gif"/>
-          Mostly Cloudy
-        </p>
-      </article>
-      <ol class="weekly-forecast">
-        <li>
-          <h3>Wed</h3>
-          <span class="high">76&deg;</span> /
-          <span class="low">56&deg;</span>
-        </li>
-        <li>
-          <h3>Wed</h3>
-          <span class="high">76 &deg;</span> /
-          <span class="low">56 &deg;</span>
-        </li>
-        <li>
-          <h3>Wed</h3>
-          <span class="high">76 &deg;</span> /
-          <span class="low">56 &deg;</span>
-        </li>
-        <li>
-          <h3>Wed</h3>
-          <span class="high">76 &deg;</span> /
-          <span class="low">56 &deg;</span>
-        </li>
-        <li>
-          <h3>Wed</h3>
-          <span class="high">76 &deg;</span> /
-          <span class="low">56 &deg;</span>
-        </li>
-      </ol>
-    </section>
+
+      loadFile("widget.css", "css")
+      loadFile("//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js", 'js', function(){
+        loadFile("//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.runtime.js", 'js', function(){
+          loadFile("widget.js", "js", init)
+        })
+      })
+
+
+    })();
+    </script>
   </body>
 </html>

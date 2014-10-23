@@ -1,0 +1,52 @@
+section.weather-widget {
+  position: absolute;
+  width: 400px;
+  height: 170px;
+  left: 50%;
+  top: 50%;
+  margin: -85px 0 0 -200px;
+  border: 1px solid #999;
+  border-radius: 16px;
+  padding:10px;
+  -webkit-box-shadow: 10px 10px 8px 0px #777;
+  box-shadow: 10px 10px 10px 0px #777;
+
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  font-size: 12px;
+}
+.weather-widget h1, .weather-widget h2, .weather-widget h3{
+  margin: 0;
+  font-weight: normal;
+}
+.weather-widget h1{
+  font-size: 170%;
+}
+
+.weather-widget article.current {
+  margin: 10px 0;
+  clear:both;
+}
+.weather-widget article.current h2 {
+  font-size: 650%;
+  float:left;
+  margin-right: 10px;
+}
+.weather-widget article.current p.conditions img{
+  display: block;
+  margin-left:4px;
+}
+.weather-widget ol.weekly-forecast {
+  clear: both;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.weather-widget ol.weekly-forecast li {
+  display: inline-block;
+  width: 17%;
+  padding: 0 0 0 2%;
+  text-align: center;
+}
+.weather-widget ol.weekly-forecast li ~ li {
+  border-left: 1px solid #ddd;
+}
