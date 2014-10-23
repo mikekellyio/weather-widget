@@ -25,7 +25,6 @@ section.weather-widget {
 
 .weather-widget article.current {
   margin: 10px 0;
-  clear:both;
 }
 .weather-widget article.current h2 {
   font-size: 650%;
@@ -34,7 +33,7 @@ section.weather-widget {
 }
 .weather-widget article.current p.conditions img{
   display: block;
-  margin-left:4px;
+  padding-left:10px;
 }
 .weather-widget ol.weekly-forecast {
   clear: both;
