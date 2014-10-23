@@ -28,7 +28,7 @@
 
       var render = function(data){
         data.city = data.title.match(/Conditions for (.*) at/)[1]
-        $("section.weather-widget").append(Handlebars.templates.widget(data))
+        $("section.weather-widget").html(Handlebars.templates.widget(data))
       }
 
       var init = function(){
