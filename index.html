@@ -24,7 +24,6 @@
          fileref.onload = onload
          document.getElementsByTagName("head")[0].appendChild(fileref)
        }
-
       }
 
       var render = function(data){
@@ -45,8 +44,10 @@
 
       loadFile("widget.css", "css")
       loadFile("//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js", 'js', function(){
-        loadFile("//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.runtime.js", 'js', function(){
-          loadFile("widget.js", "js", init)
+        loadFile("//cdnjs.cloudflare.com/ajax/libs/jquery-ajaxtransport-xdomainrequest/1.0.2/jquery.xdomainrequest.min.js", 'js', function(){
+          loadFile("//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.runtime.js", 'js', function(){
+            loadFile("widget.js", "js", init)
+          })
         })
       })
 
